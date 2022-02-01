@@ -3,8 +3,8 @@ var router = express.Router();
 const axios = require('axios');
 
 /* GET home page. */
-router.get('/posts/:tag?', function(req, res, next) {
-        axios.get("https://api.hatchways.io/assessment/blog/posts?"+req.params.tag)
+router.get('/', function(req, res, next) {
+        axios.get("https://api.hatchways.io/assessment/blog/posts?tag="+req.query.tag)
             .then((response)=>{
                 let postsArray = [];
                 response.data.posts.map((posts)=>{
