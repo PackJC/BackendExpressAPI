@@ -1,5 +1,22 @@
 extends layout
 
 block content
-    h1= Message
-    p Welcome to #{Message}
+    section
+    table
+        tr
+            th Author
+            th Author ID
+            th Likes
+            th Popularity
+            th Reads
+            th Tags
+        each post, index in posts
+            tr
+            td=post.author
+            td=post.authorid
+            td=post.likes
+            td=post.popularity
+            td=post.reads
+            td=post.tags
+
+
