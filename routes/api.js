@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require('axios');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/posts', function(req, res, next) {
         axios.get("https://api.hatchways.io/assessment/blog/posts?tag="+[req.query.tag])
             .then((response)=>{
                 let postsArray = [];
@@ -21,6 +21,10 @@ router.get('/', function(req, res, next) {
 
 });
 
+/* GET home page. */
+router.get('/ping', function(req, res, next) {
+    res.status(200).send({ success: true })
+});
 
 
 module.exports = router;
