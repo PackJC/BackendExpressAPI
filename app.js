@@ -1,11 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var apiRouter = require('./routes/api')
-var app = express();
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
+let indexRouter = require('./routes/index');
+let apiRouter = require('./routes/api')
+let app = express();
 app.listen(3001, () => {
   console.log("Server running on port 3001");
 });

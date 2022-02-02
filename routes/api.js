@@ -6,7 +6,7 @@ router.get('/posts', async (req, res) => {
     let posts = [];
     try {
         let tags = req.query.tag.split(',')
-        const requests = tags.map((tag) =>
+        let requests = tags.map((tag) =>
             axios.get("https://api.hatchways.io/assessment/blog/posts?tag="+tag)
         );
         try {
