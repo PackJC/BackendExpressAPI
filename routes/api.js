@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-const axios = require('axios');
+let express = require('express');
+let router = express.Router();
+let axios = require('axios');
 
 router.get('/posts', async (req, res) => {
     let posts = [];
@@ -10,14 +10,14 @@ router.get('/posts', async (req, res) => {
             axios.get("https://api.hatchways.io/assessment/blog/posts?tag="+tag)
         );
         try {
-            const result = await Promise.all(requests);
+            let result = await Promise.all(requests);
             for(let i = 0; i < result.length; i++){
                 posts.push(...result[i].data.posts)
             }
         } catch (err) {
             res.status(500).json({error: String(err)});
         }
-        const arrUniq = [...new Map(posts.map(v => [v.id, v])).values()]
+        let arrUniq = [...new Map(posts.map(v => [v.id, v])).values()]
 
         return res.send({posts : arrUniq});
     } catch (err){
@@ -26,7 +26,7 @@ router.get('/posts', async (req, res) => {
 
 });
 
-router.get('/ping', function(req, res, next) {
+router.get('/ping', function(req, res) {
     res.status(200).send({ success: true })
 });
 
