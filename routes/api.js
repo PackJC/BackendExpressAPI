@@ -5,13 +5,15 @@ const axios = require('axios');
 router.get('/posts', async (req, res) => {
     let posts = [];
     try {
-        var tags = req.query.tag.split(',')
+        let tags = req.query.tag.split(',')
         const requests = tags.map((tag) =>
-            axios.get("https://api.hatchways.io/assessment/blog/posts?tag=" + tag)
+            axios.get("https://api.hatchways.io/assessment/blog/posts?tag="+tag)
         );
         try {
             const result = await Promise.all(requests);
-                posts = [...result[1].data.posts, ...result[0].data.posts]
+            for(let i = 0; i < result.length; i++){
+                posts.push(...result[i].data.posts)
+            }
         } catch (err) {
             res.status(500).json({error: String(err)});
         }
