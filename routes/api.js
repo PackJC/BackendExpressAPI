@@ -3,7 +3,7 @@ var router = express.Router();
 const axios = require('axios');
 
 router.get('/posts', async (req, res) => {
-    let posts;
+    let posts = [];
     try {
         var tags = req.query.tag.split(',')
         const requests = tags.map((tag) =>
@@ -11,9 +11,8 @@ router.get('/posts', async (req, res) => {
         );
         try {
             const result = await Promise.all(requests);
-            result.map((item) => {
-                posts = item.data.posts;
-            });
+                posts = [...result[1].data.posts, ...result[0].data.posts]
+
         } catch (err) {
             res.status(500).json({error: String(err)});
         }
