@@ -3,22 +3,21 @@ var router = express.Router();
 const axios = require('axios');
 
 router.get('/posts', async (req, res) => {
+    let posts;
     try {
         var tags = req.query.tag.split(',')
-        console.log(tags)
         const requests = tags.map((tag) =>
             axios.get("https://api.hatchways.io/assessment/blog/posts?tag=" + tag)
         );
         try {
             const result = await Promise.all(requests);
-            console.log(result)
             result.map((item) => {
-                posts = item.data.posts
+                posts = item.data.posts;
             });
         } catch (err) {
             res.status(500).json({error: String(err)});
         }
-        return res.send({posts});
+        return res.send({posts : posts});
     } catch (err){
         res.status(500).json({ error: "Tags parameter is required" });
     }
