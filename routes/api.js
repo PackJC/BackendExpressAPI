@@ -12,11 +12,12 @@ router.get('/posts', async (req, res) => {
         try {
             const result = await Promise.all(requests);
                 posts = [...result[1].data.posts, ...result[0].data.posts]
-
         } catch (err) {
             res.status(500).json({error: String(err)});
         }
-        return res.send({posts : posts});
+        const arrUniq = [...new Map(posts.map(v => [v.id, v])).values()]
+
+        return res.send({posts : arrUniq});
     } catch (err){
         res.status(500).json({ error: "Tags parameter is required" });
     }
